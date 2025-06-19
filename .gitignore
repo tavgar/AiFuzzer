@@ -1,0 +1,79 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Application output and logs
+logs/
+output/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# API keys and secrets
+.env
+*.key
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Test cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Configuration files with API keys
+examples/config.json
+config.json
+*.config.json
+**/config.json
+
+# Virtual environments (additional patterns)
+aifuzzer_venv/
+*_venv/
+
+# All output and results directories
+results/
+frontdoor/fitd_fuzzer/examples/results/
+frontdoor/fitd_fuzzer/results/
+frontdoor/results/
+
+# Conversation and fuzzing logs
+**/conversation_*.json
+**/fuzzing_*.log
+**/fuzzing_*.jsonl
+successful_*.jsonl
+results_*.jsonl
+
+# Any other potential sensitive files
+*.secret
+api_keys.txt
