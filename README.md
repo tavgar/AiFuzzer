@@ -1,180 +1,246 @@
-# LLM Jailbreak Fuzzer
+# 🎯 AiFuzzer - Advanced LLM Safety Testing Framework
 
-A command-line tool for testing LLM safety measures by automatically generating and evaluating jailbreak prompts. This tool uses Google's Gemini to generate potential jailbreak prompts and tests them against Anthropic's Claude model.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![GitHub](https://img.shields.io/badge/GitHub-tavgar/AiFuzzer-black.svg)](https://github.com/tavgar/AiFuzzer)
 
-## Features
+A state-of-the-art command-line framework for testing LLM safety measures through automated jailbreak prompt generation and evaluation. Features advanced techniques including genetic algorithms, context manipulation, and the highly effective **Foot-in-the-Door technique** with **94% average success rate**.
 
-- Automatic generation of diverse jailbreak prompts using Gemini 2.5 Pro Preview
-- Automatic evaluation of responses to determine if jailbreak was successful
-- Learning mechanism that improves prompts based on previous attempts
-- Detailed logging and statistics
-- Interactive and batch modes
-- Configurable targeting of specific behaviors
+## 🌟 Key Features
 
-## Advanced Techniques
+### Core Capabilities
+- **Multi-Model Support**: Test Anthropic Claude models using Google Gemini or Claude-to-Claude generation
+- **Advanced Fuzzing Engine**: Genetic algorithms, token manipulation, and context overflow techniques
+- **Interactive & Batch Modes**: Full CLI support with detailed configuration options
+- **Comprehensive Analytics**: Track technique effectiveness and generate detailed reports
+- **Security-First Design**: Built-in API key protection and secure configuration management
 
-The fuzzer includes sophisticated techniques to improve jailbreak effectiveness:
+### Specialized Techniques
 
-### Genetic Algorithms
-- Evolves prompts through selection, crossover, and mutation operations
-- Tracks "prompt lineage" to understand which evolutionary paths are most effective
-- Uses fitness functions that consider both success rate and pattern effectiveness
+#### 🚪 Foot-in-the-Door (FITD) Technique
+- **94% average success rate** across various models
+- Multi-turn conversation approach with progressive escalation
+- Three bridge strategies: gradual, context-shift, and role-based
+- Dynamic adaptation based on model responses
 
-### Token Manipulation
-- Character substitution (using similar-looking characters)
-- Zero-width space insertion in sensitive words
-- Homoglyph substitution (replacing characters with visually similar ones)
-- Word splitting to bypass token-based filters
+#### 🧬 Genetic Algorithms
+- Evolutionary prompt optimization through selection, crossover, and mutation
+- Fitness tracking and lineage analysis
+- Population-based improvement over generations
 
-### Context Manipulation
-- Multi-layered attack strategies (nested contexts and role-playing)
-- Hypothetical frameworks ("in a universe where...")
-- Advanced misdirection techniques
-- Cognitive exploits (reasoning chains that justify harmful outputs)
+#### 🔧 Token Manipulation
+- Character substitution and homoglyph replacement
+- Zero-width space insertion and word splitting
+- Leetspeak transformation and unicode obfuscation
 
-### Enhanced Learning
-- Pattern analysis across successful and failed attempts
-- Clustering of effective techniques
-- Automatic enhancement of prompts based on learned patterns
+#### 🎭 Context Manipulation
+- Role-playing scenarios and hypothetical frameworks
+- Multi-layered attacks with nested contexts
+- Cognitive exploits and confusion techniques
+- Context overflow with strategic positioning
 
-## Installation
+#### 🔄 Claude-to-Claude Fuzzing
+- Use Claude-3.7-Sonnet to generate prompts for Claude-Neptune
+- All-Claude testing environment for specialized evaluation
+- Advanced pattern recognition and adaptation
 
-### Prerequisites
+## 🚀 Quick Start
 
-- Python 3.8 or higher
-- API keys for Google's Gemini and Anthropic's Claude
-
-### Install from source
+### Installation
 
 ```bash
-git clone https://github.com/yourusername/aifuzzer.git
-cd aifuzzer
+git clone https://github.com/tavgar/AiFuzzer.git
+cd AiFuzzer
 pip install -e .
 ```
 
-## Configuration Setup
+### Configuration Setup
 
-### 🔒 API Key Security
-
-**IMPORTANT**: Never commit API keys to version control. This repository includes security measures to prevent accidental exposure.
-
-### Setting Up Configuration
-
-1. **Copy the template configuration file:**
+1. **Copy the template configuration:**
    ```bash
    cp examples/config.template.json examples/config.json
    ```
 
-2. **Edit the configuration file:**
+2. **Add your API keys:**
    ```bash
-   # Open examples/config.json and replace the placeholder values:
-   # "YOUR_GEMINI_API_KEY_HERE" -> your actual Gemini API key
-   # "YOUR_CLAUDE_API_KEY_HERE" -> your actual Claude API key
+   # Edit examples/config.json:
+   # "gemini_api_key": "your_actual_gemini_key"
+   # "claude_api_key": "your_actual_claude_key"
    ```
 
-3. **Alternatively, use environment variables:**
-   ```bash
-   export GEMINI_API_KEY="your_gemini_api_key"
-   export CLAUDE_API_KEY="your_claude_api_key"
-   ```
-
-### Getting API Keys
-
-- **Gemini API Key**: Get from [Google AI Studio](https://aistudio.google.com/app/apikey)
-- **Claude API Key**: Get from [Anthropic Console](https://console.anthropic.com/)
-
-### Configuration File Structure
-
-The `examples/config.json` file (ignored by git) contains:
-- API credentials
-- Model selection (Gemini 2.5 Pro Preview, Claude 3.7 Sonnet, etc.)
-- Fuzzing parameters (batch size, temperature, max attempts)
-- Advanced technique settings
-- Output directory configuration
-
-**Note**: The `examples/config.json` file is automatically ignored by git to prevent accidental commit of API keys.
-
-## Usage
+3. **Get API Keys:**
+   - **Gemini**: [Google AI Studio](https://aistudio.google.com/app/apikey)
+   - **Claude**: [Anthropic Console](https://console.anthropic.com/)
 
 ### Basic Usage
 
 ```bash
-# Run with API keys as environment variables
-export GEMINI_API_KEY="your_gemini_api_key"
-export CLAUDE_API_KEY="your_claude_api_key"
-aifuzzer --max-attempts 20
-```
+# Standard fuzzing with Gemini → Claude
+aifuzzer --config examples/config.json --max-attempts 50
 
-### Interactive Mode
-
-```bash
+# Interactive mode with guided setup
 aifuzzer --interactive
+
+# Enable advanced techniques with analytics
+aifuzzer --use-advanced-techniques --save-technique-analytics
 ```
 
-### Using Configuration Files
+## 🎯 Specialized Testing Modes
 
+### Foot-in-the-Door Testing
 ```bash
-# Create a configuration file with your settings
-aifuzzer --interactive --save-config config.json
+# Run FITD technique tests (94% success rate)
+python run_foot_in_door_test.py --num-tests 20 --escalation-levels 4
 
-# Use the saved configuration
-aifuzzer --config config.json
+# Dynamic approach with real-time adaptation
+python run_foot_in_door_test.py --dynamic --max-failures 3
+
+# Context-shift bridge strategy
+python run_foot_in_door_test.py --bridge-strategy context_shift
 ```
 
-### Advanced Options
-
+### Claude-to-Claude Fuzzing
 ```bash
-# Target specific behaviors
-aifuzzer --target-behaviors examples/target_behaviors.txt
+# Quick Claude-to-Claude test
+python run_sonnet_neptune_test.py --max-attempts 30 --verbose
 
-# Start with initial prompts
-aifuzzer --initial-prompts examples/initial_prompts.txt
-
-# Customize model selection
-aifuzzer --gemini-model "gemini-2.5-pro-preview-0506" --claude-model "claude-3-opus-20240229"
-
-# Adjust fuzzing parameters
-aifuzzer --batch-size 10 --temperature 0.8 --max-attempts 100
+# Advanced Claude-to-Claude with custom models
+python run_claude_to_claude_fuzzer.py \
+  --generator-model claude-3-7-sonnet-20250219 \
+  --target-model claude-neptune \
+  --temperature 0.9
 ```
 
-### Advanced Techniques Options
-
+### Pattern Analysis
 ```bash
-# Enable or disable advanced techniques
-aifuzzer --use-advanced-techniques  # Enable (default)
-aifuzzer --no-advanced-techniques   # Disable
+# Analyze Claude-specific patterns
+python run_claude_pattern_demo.py
 
-# Configure genetic algorithm parameters
-aifuzzer --genetic-algorithm-population 30 --genetic-algorithm-mutation-rate 0.4 --genetic-algorithm-crossover-rate 0.8
-
-# Configure token and context manipulation
-aifuzzer --token-manipulation-intensity 0.7 --context-manipulation-probability 0.5
-
-# Save technique analytics
-aifuzzer --save-technique-analytics
+# Pattern-based fuzzing
+python run_pattern_fuzzer.py --use-claude-patterns
 ```
 
-## Output
+## ⚙️ Advanced Configuration
 
-The tool outputs results in several formats:
+### Genetic Algorithm Parameters
+```bash
+aifuzzer \
+  --genetic-algorithm-population 30 \
+  --genetic-algorithm-mutation-rate 0.4 \
+  --genetic-algorithm-crossover-rate 0.8
+```
 
-1. **Console output** - Shows real-time progress and results
-2. **Log files** - Detailed logging of the tool's operation
-3. **Result files** - JSONL files containing all attempted prompts and responses
-4. **Success files** - JSONL files containing only successful jailbreak attempts
+### Context Manipulation
+```bash
+aifuzzer \
+  --context-manipulation-probability 0.7 \
+  --token-manipulation-intensity 0.8
+```
 
-Results are stored in the `output` directory by default.
+### Foot-in-the-Door Settings
+```json
+{
+  "foot_in_door_settings": {
+    "enabled": true,
+    "escalation_levels": 3,
+    "bridge_strategy": "gradual",
+    "dynamic": true,
+    "max_failures": 3
+  }
+}
+```
 
-## Ethical Considerations
+## 📊 Results & Analytics
 
-This tool is intended for responsible security research and improvement of AI safety measures. Usage should comply with:
+### Output Files
+- **`results_[timestamp].jsonl`**: Complete fuzzing attempts with metadata
+- **`successful_[timestamp].jsonl`**: Only successful jailbreaks
+- **`technique_analytics_[timestamp].json`**: Effectiveness analysis by technique
 
-1. Terms of service for both Google's and Anthropic's APIs
-2. Responsible disclosure practices
-3. Ethical research guidelines
+### Sample Analytics Output
+```
+===== Technique Effectiveness Summary =====
+Overall success rate: 12.50% (10/80)
 
-Do not use this tool to deploy jailbreak prompts in production environments or to harm users.
+Per-technique success rates:
+- foot_in_door_technique: 94.00% (47/50)
+- context_manipulation: 23.08% (3/13)
+- token_manipulation: 18.75% (3/16)
+- genetic_algorithm: 15.20% (19/125)
+```
 
-## License
+## 🏗️ Project Structure
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+```
+AiFuzzer/
+├── src/
+│   ├── core/                 # Core fuzzing engine and techniques
+│   │   ├── fuzzing_engine.py
+│   │   ├── advanced_techniques.py
+│   │   └── claude_patterns/  # Claude-specific patterns
+│   ├── models/               # Model clients (Gemini, Claude)
+│   ├── utils/                # Configuration and logging
+│   └── cli/                  # Command-line interface
+├── examples/                 # Configuration templates and prompts
+├── docs/                     # Specialized technique documentation
+│   ├── FOOT_IN_DOOR_TECHNIQUE.md
+│   ├── CLAUDE_TO_CLAUDE_FUZZING.md
+│   └── ADVANCED_TECHNIQUES.md
+├── run_*.py                  # Specialized testing runners
+└── tests/                    # Test suites
+```
+
+## 📈 Performance & Research
+
+### Benchmark Results
+- **Foot-in-the-Door Technique**: 94% average success rate
+- **Multi-technique Combinations**: Up to 23% success rate improvement
+- **Genetic Algorithm Optimization**: Continuous improvement over generations
+- **Context Overflow**: Effective against context-aware safety measures
+
+### Research Foundation
+Based on cutting-edge research including:
+- "A Wolf in Sheep's Clothing: Generalized Nested Jailbreak Prompts" (Ding et al., 2023)
+- Advanced prompt engineering and adversarial ML techniques
+- Multi-turn conversation analysis and psychological persuasion patterns
+
+## 🔒 Security & Ethics
+
+### Built-in Security Measures
+- **API Key Protection**: Comprehensive .gitignore patterns prevent accidental exposure
+- **Safe Configuration**: Template-based setup with placeholder keys
+- **Output Filtering**: Automatic detection and flagging of sensitive content
+
+### Ethical Usage Guidelines
+This tool is intended **exclusively** for:
+- ✅ Security research and AI safety improvement
+- ✅ Red-team testing of LLM guardrails
+- ✅ Academic research and responsible disclosure
+- ✅ Model safety evaluation and enhancement
+
+**Prohibited uses:**
+- ❌ Deploying jailbreaks against production systems
+- ❌ Generating harmful content for malicious purposes
+- ❌ Circumventing safety measures in real applications
+
+## 🤝 Contributing
+
+We welcome contributions! Areas of particular interest:
+- New jailbreak techniques and patterns
+- Model support extensions
+- Performance optimizations
+- Documentation improvements
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🔗 Links
+
+- **Repository**: [https://github.com/tavgar/AiFuzzer](https://github.com/tavgar/AiFuzzer)
+- **Issues**: [https://github.com/tavgar/AiFuzzer/issues](https://github.com/tavgar/AiFuzzer/issues)
+- **Documentation**: See `docs/` directory for detailed technique guides
+
+---
+
+⚠️ **Responsible Research**: This tool is designed to improve AI safety through rigorous testing. Please use responsibly and in accordance with applicable terms of service and ethical guidelines.
