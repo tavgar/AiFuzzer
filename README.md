@@ -52,6 +52,48 @@ cd aifuzzer
 pip install -e .
 ```
 
+## Configuration Setup
+
+### 🔒 API Key Security
+
+**IMPORTANT**: Never commit API keys to version control. This repository includes security measures to prevent accidental exposure.
+
+### Setting Up Configuration
+
+1. **Copy the template configuration file:**
+   ```bash
+   cp examples/config.template.json examples/config.json
+   ```
+
+2. **Edit the configuration file:**
+   ```bash
+   # Open examples/config.json and replace the placeholder values:
+   # "YOUR_GEMINI_API_KEY_HERE" -> your actual Gemini API key
+   # "YOUR_CLAUDE_API_KEY_HERE" -> your actual Claude API key
+   ```
+
+3. **Alternatively, use environment variables:**
+   ```bash
+   export GEMINI_API_KEY="your_gemini_api_key"
+   export CLAUDE_API_KEY="your_claude_api_key"
+   ```
+
+### Getting API Keys
+
+- **Gemini API Key**: Get from [Google AI Studio](https://aistudio.google.com/app/apikey)
+- **Claude API Key**: Get from [Anthropic Console](https://console.anthropic.com/)
+
+### Configuration File Structure
+
+The `examples/config.json` file (ignored by git) contains:
+- API credentials
+- Model selection (Gemini 2.5 Pro Preview, Claude 3.7 Sonnet, etc.)
+- Fuzzing parameters (batch size, temperature, max attempts)
+- Advanced technique settings
+- Output directory configuration
+
+**Note**: The `examples/config.json` file is automatically ignored by git to prevent accidental commit of API keys.
+
 ## Usage
 
 ### Basic Usage
